@@ -243,7 +243,7 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.bannerView?.isHidden = false
-        self.keyboardHeight = self.height(forOrientation: self.interfaceOrientation, withTopBanner: true)
+        self.keyboardHeight = self.height(forOrientation: interfaceOrientation, withTopBanner: true)
     }
     
     override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
@@ -446,11 +446,11 @@ class KeyboardViewController: UIInputViewController {
     func setHeight(_ height: CGFloat) {
         if self.heightConstraint == nil {
             self.heightConstraint = NSLayoutConstraint(
-                item:self.view,
-                attribute:NSLayoutConstraint.Attribute.height,
-                relatedBy:NSLayoutConstraint.Relation.equal,
+                item:self.view!,
+                attribute:.height,
+                relatedBy:.equal,
                 toItem:nil,
-                attribute:NSLayoutConstraint.Attribute.notAnAttribute,
+                attribute:.notAnAttribute,
                 multiplier:0,
                 constant:height)
             self.heightConstraint!.priority = UILayoutPriority(1000)
@@ -687,6 +687,7 @@ class KeyboardViewController: UIInputViewController {
         self.advanceToNextInputMode()
     }
     
+    // 创建设置窗口
     @IBAction func toggleSettings() {
         // lazy load settings
         if self.settingsView == nil {
@@ -699,10 +700,10 @@ class KeyboardViewController: UIInputViewController {
                 
                 aSettings.translatesAutoresizingMaskIntoConstraints = false
                 
-                let widthConstraint = NSLayoutConstraint(item: aSettings, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1, constant: 0)
-                let heightConstraint = NSLayoutConstraint(item: aSettings, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant: 0)
-                let centerXConstraint = NSLayoutConstraint(item: aSettings, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
-                let centerYConstraint = NSLayoutConstraint(item: aSettings, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
+                let widthConstraint = NSLayoutConstraint(item: aSettings, attribute: .width, relatedBy: .equal, toItem: self.view, attribute: .width, multiplier: 1, constant: 0)
+                let heightConstraint = NSLayoutConstraint(item: aSettings, attribute: .height, relatedBy: .equal, toItem: self.view, attribute: .height, multiplier: 1, constant: 0)
+                let centerXConstraint = NSLayoutConstraint(item: aSettings, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1, constant: 0)
+                let centerYConstraint = NSLayoutConstraint(item: aSettings, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1, constant: 0)
                 
                 self.view.addConstraint(widthConstraint)
                 self.view.addConstraint(heightConstraint)
@@ -743,10 +744,12 @@ class KeyboardViewController: UIInputViewController {
         }
     }
     
+    // 判断是否是标点
     func characterIsPunctuation(_ character: Character) -> Bool {
         return (character == ".") || (character == "!") || (character == "?")
     }
     
+    // 判断是否为换行
     func characterIsNewline(_ character: Character) -> Bool {
         return (character == "\n") || (character == "\r")
     }
@@ -767,6 +770,8 @@ class KeyboardViewController: UIInputViewController {
         return true
     }
     
+    
+    // 处理大小写
     func shouldAutoCapitalize() -> Bool {
         if !UserDefaults.standard.bool(forKey: kAutoCapitalization) {
             return false

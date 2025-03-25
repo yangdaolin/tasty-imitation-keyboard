@@ -19,6 +19,7 @@ import UIKit
 
 var traitPollingTimer: CADisplayLink?
 
+// 通过刷新频率处理 Dark/Light 模式变化
 extension KeyboardViewController {
     
     func addInputTraitsObservers() {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-var counter = 0
+var counter: Int = 0
 
 enum ShiftState {
     case disabled
@@ -67,6 +67,12 @@ class Key: Hashable {
         case space
         case `return`
         case settings
+        
+        // extended
+        case pinyin
+        case bihua
+        case pianpang
+        
         case other
     }
     

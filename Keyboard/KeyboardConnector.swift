@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol Connectable: class {
+protocol Connectable: AnyObject {
     func attachmentPoints(_ direction: Direction) -> (CGPoint, CGPoint)
     func attachmentDirection() -> Direction?
     func attach(_ direction: Direction?) // call with nil to detach
@@ -67,6 +67,7 @@ class KeyboardConnector: KeyboardKeyBackground {
             let startPoints = self.startConnectable!.attachmentPoints(self.startDir)
             let endPoints = self.endConnectable!.attachmentPoints(self.endDir)
 
+            // 坐标转换
             self.convertedStartPoints = (
                 superview.convert(startPoints.0, from: self.start),
                 superview.convert(startPoints.1, from: self.start))
@@ -74,8 +75,10 @@ class KeyboardConnector: KeyboardKeyBackground {
                 superview.convert(endPoints.0, from: self.end),
                 superview.convert(endPoints.1, from: self.end))
         }
+        
     }
 
+    // 整个最大框的中心点，然后向外拓展 32
     func resizeFrame() {
         generateConvertedPoints()
 

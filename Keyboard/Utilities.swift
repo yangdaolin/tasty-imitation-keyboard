@@ -67,7 +67,7 @@ func memoize<T:Hashable, U>(_ fn : @escaping (T) -> U) -> (T) -> U {
 //    return memoized
 //}
 
-var profile: ((_ id: String) -> Double?) = {
+@MainActor var profile: ((_ id: String) -> Double?) = {
     var counterForName = Dictionary<String, Double>()
     var isOpen = Dictionary<String, Double>()
     

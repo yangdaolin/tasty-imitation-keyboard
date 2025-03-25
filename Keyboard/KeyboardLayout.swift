@@ -818,13 +818,11 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                 if self.characterRowHeuristic(row) {
                     frames = self.layoutCharacterRow(row, keyWidth: letterKeyWidth, gapWidth: keyGap, frame: frame)
                 }
-                    
-                    // character row with side buttons: shift, backspace, etc.
+                // character row with side buttons: shift, backspace, etc.
                 else if self.doubleSidedRowHeuristic(row) {
                     frames = self.layoutCharacterWithSidesRow(row, frame: frame, isLandscape: isLandscape, keyWidth: letterKeyWidth, keyGap: keyGap)
                 }
-                    
-                    // bottom row with things like space, return, etc.
+                // bottom row with things like space, return, etc.
                 else {
                     frames = self.layoutSpecialKeysRow(row, keyWidth: letterKeyWidth, gapWidth: lastRowKeyGap, leftSideRatio: lastRowLeftSideRatio, rightSideRatio: lastRowRightSideRatio, micButtonRatio: self.layoutConstants.micButtonPortraitWidthRatioToOtherSpecialButtons, isLandscape: isLandscape, frame: frame)
                 }
@@ -836,6 +834,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         return keyMap
     }
     
+    // Heuristic 启发式的
     func characterRowHeuristic(_ row: [Key]) -> Bool {
         return (row.count >= 1 && row[0].isCharacter)
     }

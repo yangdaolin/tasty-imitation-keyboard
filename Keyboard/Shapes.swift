@@ -178,7 +178,6 @@ func drawBackspace(_ bounds: CGRect, color: UIColor) {
     
     centerShape(CGSize(width: 44 * xScalingFactor, height: 32 * yScalingFactor), toRect: bounds)
     
-    
     //// Color Declarations
     let color = color
     let color2 = UIColor.gray // TODO:

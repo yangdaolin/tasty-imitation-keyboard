@@ -10,7 +10,7 @@ import UIKit
 
 // This class does not actually draw its contents; rather, it generates bezier curves for others to use.
 // (You can still move it around, resize it, and add subviews to it. It just won't display the curve assigned to it.)
-class KeyboardKeyBackground: UIView, Connectable {
+class KeyboardKeyBackground: UIView, @preconcurrency Connectable {
     
     var fillPath: UIBezierPath?
     var underPath: UIBezierPath?
